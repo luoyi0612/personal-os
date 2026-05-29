@@ -1,0 +1,61 @@
+---
+title: "TypeScript 类型体操入门"
+date: "2024-03-10"
+description: "从实际问题出发，学习 TypeScript 高级类型：条件类型、映射类型、模板字面量类型，以及常用工具类型的实现原理。"
+tags: ["TypeScript", "编程", "前端"]
+category: "frontend"
+---
+
+## 什么是类型体操
+
+TypeScript 的类型系统是图灵完备的，这意味着你可以用类型来"编程"。类型体操就是利用这一特性，在类型层面解决复杂问题。
+
+## 条件类型
+
+```typescript
+type IsString<T> = T extends string ? true : false;
+
+type A = IsString<"hello">; // true
+type B = IsString<42>;      // false
+```
+
+## 映射类型
+
+```typescript
+type Readonly<T> = {
+  readonly [K in keyof T]: T[K];
+};
+
+type Optional<T> = {
+  [K in keyof T]?: T[K];
+};
+```
+
+## 模板字面量类型
+
+```typescript
+type EventName<T extends string> = `on${Capitalize<T>}`;
+
+type ClickEvent = EventName<"click">; // "onClick"
+type ChangeEvent = EventName<"change">; // "onChange"
+```
+
+## 实用工具类型
+
+TypeScript 内置了很多有用的工具类型：
+
+- `Partial<T>` — 所有属性变为可选
+- `Required<T>` — 所有属性变为必填
+- `Pick<T, K>` — 选取部分属性
+- `Omit<T, K>` — 排除部分属性
+- `ReturnType<T>` — 获取函数返回类型
+
+## 实战：DeepPartial
+
+```typescript
+type DeepPartial<T> = T extends object
+  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  : T;
+```
+
+这个类型递归地将对象的所有嵌套属性变为可选，在处理配置对象时非常有用。

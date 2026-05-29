@@ -1,0 +1,47 @@
+---
+title: "用 Next.js 构建个人博客"
+date: "2024-01-15"
+description: "记录用 Next.js + MDX 搭建个人博客的过程，包括技术选型、项目结构和核心实现。"
+tags: ["Next.js", "MDX", "React"]
+category: "frontend"
+---
+
+## 为什么选择 Next.js
+
+Next.js 提供了出色的开发体验，内置 App Router、服务端渲染和静态生成，非常适合构建内容驱动的博客网站。
+
+## 技术栈
+
+- **框架**: Next.js 15 + React 19
+- **样式**: TailwindCSS + shadcn/ui
+- **内容**: MDX（Markdown + JSX）
+- **动画**: Framer Motion
+- **主题**: next-themes（支持 dark mode）
+
+## 项目结构
+
+```
+src/
+├── app/          # Next.js App Router 页面
+├── components/   # 可复用组件
+└── lib/          # 工具函数
+
+content/
+└── blog/         # MDX 文章
+```
+
+## MDX 的优势
+
+MDX 让你在 Markdown 中直接使用 React 组件，非常适合技术博客：
+
+```mdx
+import { Alert } from "@/components/ui/alert"
+
+## 这是一篇 MDX 文章
+
+<Alert>这是一个 React 组件！</Alert>
+```
+
+## 总结
+
+用 Next.js + MDX 构建博客是一个很好的选择，既有静态站点的性能优势，又保留了 React 的灵活性。

@@ -1,26 +1,133 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-sans);
   --font-mono: var(--font-geist-mono);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.667);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.333);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  /* Notion Purple primary */
+  --primary: #7c3aed;
+  --primary-foreground: #ffffff;
+  --primary-pressed: #6d28d9;
+
+  /* Surfaces */
+  --background: #ffffff;
+  --foreground: #37352f;
+  --card: #ffffff;
+  --card-foreground: #37352f;
+  --popover: #ffffff;
+  --popover-foreground: #37352f;
+
+  /* Secondary / muted */
+  --secondary: #f7f6f3;
+  --secondary-foreground: #37352f;
+  --muted: #f7f6f3;
+  --muted-foreground: #9b9a97;
+
+  /* Accent */
+  --accent: #f1f0ee;
+  --accent-foreground: #37352f;
+
+  /* Borders */
+  --border: #e9e9e7;
+  --input: #e9e9e7;
+  --ring: #7c3aed;
+
+  /* Notion brand navy */
+  --brand-navy: #0f1b2d;
+  --brand-navy-deep: #0a1220;
+
+  /* Notion tints */
+  --tint-peach: #fdebd0;
+  --tint-rose: #fce4ec;
+  --tint-mint: #e8f5e9;
+  --tint-lavender: #ede7f6;
+  --tint-sky: #e3f2fd;
+  --tint-yellow: #fffde7;
+  --tint-yellow-bold: #fbbf24;
+  --tint-cream: #fafaf8;
+
+  --destructive: oklch(0.577 0.245 27.325);
+  --radius: 0.75rem;
+}
+
+.dark {
+  --background: #191919;
+  --foreground: #e6e6e5;
+  --card: #252525;
+  --card-foreground: #e6e6e5;
+  --popover: #252525;
+  --popover-foreground: #e6e6e5;
+  --primary: #8b5cf6;
+  --primary-foreground: #ffffff;
+  --secondary: #2f2f2f;
+  --secondary-foreground: #e6e6e5;
+  --muted: #2f2f2f;
+  --muted-foreground: #787774;
+  --accent: #2f2f2f;
+  --accent-foreground: #e6e6e5;
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: #8b5cf6;
+  --destructive: oklch(0.704 0.191 22.216);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Prose styles for MDX */
+.prose {
+  @apply text-foreground max-w-none;
 }
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  @apply font-semibold tracking-tight text-foreground;
+}
+.prose h1 { @apply text-4xl mt-8 mb-4; }
+.prose h2 { @apply text-2xl mt-8 mb-3 border-b border-border pb-2; }
+.prose h3 { @apply text-xl mt-6 mb-2; }
+.prose p { @apply leading-7 mb-4; }
+.prose a { @apply text-primary underline underline-offset-4; }
+.prose code { @apply bg-muted px-1.5 py-0.5 rounded text-sm font-mono; }
+.prose pre { @apply bg-muted rounded-lg p-4 overflow-x-auto mb-4; }
+.prose pre code { @apply bg-transparent p-0; }
+.prose blockquote { @apply border-l-4 border-primary pl-4 italic text-muted-foreground my-4; }
+.prose ul { @apply list-disc pl-6 mb-4 space-y-1; }
+.prose ol { @apply list-decimal pl-6 mb-4 space-y-1; }
+.prose hr { @apply border-border my-8; }
+.prose img { @apply rounded-lg my-6; }
+.prose table { @apply w-full border-collapse mb-4; }
+.prose th { @apply border border-border px-4 py-2 bg-muted font-medium text-left; }
+.prose td { @apply border border-border px-4 py-2; }
