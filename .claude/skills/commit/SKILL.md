@@ -21,6 +21,7 @@
    - scope 可选，填受影响的模块/目录（如 `blog`、`ui`、`lib`）
    - subject 动词原形开头，首字母小写，不加句号，≤ 72 字符
 5. 执行提交，不加 `--no-verify`
+6. 推送到远程：`git push`
 
 ## Commit Message Examples
 
